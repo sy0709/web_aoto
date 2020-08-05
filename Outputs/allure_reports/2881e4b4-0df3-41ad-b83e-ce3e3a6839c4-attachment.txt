@@ -1,0 +1,18 @@
+INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:31.199994，结束等待时间点：2020-08-05 12:17:31.239703，等待时长0:00:00.039709
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+INFO     root:basepage.py:103 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:31.832286，结束等待时间点：2020-08-05 12:17:31.939584，等待时长0:00:00.107298
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+INFO     root:basepage.py:103 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:32.298330，结束等待时间点：2020-08-05 12:17:32.338325，等待时长0:00:00.039995
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+INFO     root:basepage.py:29 在 首页_等待退出按钮出现 等待元素('xpath', "//a[text()='退出']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:32.484972，结束等待时间点：2020-08-05 12:17:55.120356，等待时长0:00:22.635384
+INFO     root:basepage.py:29 在 首页_等待退出按钮出现 等待元素('xpath', "//a[text()='退出']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:55.120658，结束等待时间点：2020-08-05 12:17:55.162064，等待时长0:00:00.041406
+INFO     root:test_login.py:56 断言成功，实际结果为True
+INFO     root:conftest.py:17 执行完成清理工作---整个测试类只执行一次

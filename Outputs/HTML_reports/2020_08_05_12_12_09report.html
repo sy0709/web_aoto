@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (extras.classList.contains("collapsed")) {
+            expandcollapse.classList.add("expander")
+        } else if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    sort_column(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+
+        if (key_a == key_b) return 0;
+
+        if (reversed) {
+            return (key_a < key_b ? 1 : -1);
+        } else {
+            return (key_a > key_b ? 1 : -1);
+        }
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>2020_08_05_12_12_09report.html</h1>
+    <p>Report generated on 05-Aug-2020 at 12:18:13 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.1.1</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>C:\Program Files\Java\jdk1.8.0_151</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{"pluggy": "0.13.1", "py": "1.9.0", "pytest": "5.4.3"}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{"allure-pytest": "2.8.17", "html": "2.1.1", "metadata": "1.10.0", "rerunfailures": "9.0"}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.7.1</td></tr></table>
+    <h2>Summary</h2>
+    <p>9 tests ran in 362.20 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">9 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">1 rerun</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="rerun results-table-row">
+        <tr>
+          <td class="col-result">Rerun</td>
+          <td class="col-name">TestCases/Invest/test_invest.py::TestInverst::test_success_bid</td>
+          <td class="col-duration">134.55</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;TestCases.Invest.test_invest.TestInverst object at 0x0000028354047B38&gt;<br/>init = (&lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;dc44082af6bc0661d2465556d93a30ea&quot;)&gt;, &lt;PageObjects.inverst_pa...ls_page.UserDetailsPage object at 0x00000283540B40F0&gt;, &lt;PageObjects.index_page.IndexPage object at 0x00000283540B4400&gt;)<br/><br/>    def test_success_bid(self,init):<br/>        # 选择首页第一个标（状态为竞标中），点击&quot;抢投标&quot;按钮<br/>        init[3].choose_the_first_bid()<br/>    <br/>        time.sleep(2)<br/>    <br/>        # 获取投前标额<br/>        money_before_bid = float(init[1].get_bid_money())<br/>        logging.info(&#x27;投前标额{}&#x27;.format(money_before_bid))<br/>    <br/>        # 获取用户投标前的可用余额<br/>        user_money_before_invest = float(init[1].get_user_money())<br/>        logging.info(&#x27;用户投标前{}&#x27;.format(user_money_before_invest))<br/>    <br/>        # 标页面-输入投资金额，点击投标<br/>        init[1].user_invest(cd.invest_money)<br/>        logging.info(&#x27;-------------------成功输入投资金额----------------------&#x27;)<br/>    <br/>        # 投票成功弹窗-点击查看并激活&quot;<br/>        init[1].click_activa_button_in_success_popup()<br/>    <br/>        # 帐户少2000 获取帐户金额<br/>        user_money_after_invest =float(init[2].get_user_money())<br/>        logging.info(&#x27;用户投标后{}&#x27;.format(user_money_after_invest))<br/>    <br/>        # 返回上一页面，刷新页面<br/>        init[0].back()<br/>        init[0].refresh()<br/>    <br/>        # 获取投资后标可投金额<br/>        money_after_bid = float(init[1].get_bid_money())<br/>        logging.info(&#x27;投后标额{}&#x27;.format(money_after_bid))<br/>    <br/>        logging.info(&quot;断言&quot;)<br/>        # 断言：用户投前余额-投后余额=2000<br/>        assert int(user_money_before_invest - user_money_after_invest) == cd.invest_money<br/>        # 断言：（投前标额-投后标额）*10000=2000&quot;<br/>&gt;       assert int((money_before_bid - money_after_bid)*10000) == cd.invest_money<br/><span class="error">E       assert 1999 == 2000</span><br/><span class="error">E         +1999</span><br/><span class="error">E         -2000</span><br/><br/>TestCases\Invest\test_invest.py:107: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>INFO     root:conftest.py:24 开始执行用例---scope=&#x27;function&#x27;每个测试执行一次
+INFO     root:test_invest.py:24 实例化PO页面对象
+INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:20.711748，结束等待时间点：2020-08-05 12:12:20.810507，等待时长0:00:00.098759
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.276162，结束等待时间点：2020-08-05 12:12:21.352672，等待时长0:00:00.076510
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.612606，结束等待时间点：2020-08-05 12:12:21.659823，等待时长0:00:00.047217
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 首页_点击第一个抢投标按钮 等待元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.943372，结束等待时间点：2020-08-05 12:12:44.262207，等待时长0:00:22.318835
+INFO     root:basepage.py:51 在首页_点击第一个抢投标按钮，查找元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)
+INFO     root:basepage.py:78 在首页_点击第一个抢投标按钮，点击元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:11.999920，结束等待时间点：2020-08-05 12:13:12.132164，等待时长0:00:00.132244
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)的文本:995.16
+INFO     root:test_invest.py:78 投前标额995.16
+INFO     root:basepage.py:29 在 标页面_获取用户余额 等待元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.237807，结束等待时间点：2020-08-05 12:13:12.283092，等待时长0:00:00.045285
+INFO     root:basepage.py:51 在标页面_获取用户余额，查找元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)
+INFO     root:basepage.py:157 在标页面_获取用户余额，获取元素：(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)的属性data-amount值：6138221474.77
+INFO     root:test_invest.py:82 用户投标前6138221474.77
+INFO     root:basepage.py:29 在 标页面_输入投资金额 等待元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.314054，结束等待时间点：2020-08-05 12:13:12.348912，等待时长0:00:00.034858
+INFO     root:basepage.py:51 在标页面_输入投资金额，查找元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)
+INFO     root:basepage.py:103 在标页面_输入投资金额，给(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)元素，输入：2000
+INFO     root:basepage.py:29 在 标页面_点击“投标”按钮 等待元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.652381，结束等待时间点：2020-08-05 12:13:12.708224，等待时长0:00:00.055843
+INFO     root:basepage.py:51 在标页面_点击“投标”按钮，查找元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)
+INFO     root:basepage.py:78 在标页面_点击“投标”按钮，点击元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)
+INFO     root:test_invest.py:86 -------------------成功输入投资金额----------------------
+INFO     root:basepage.py:29 在 标页面_投票成功弹窗-点击查看并激活 等待元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.935014，结束等待时间点：2020-08-05 12:13:13.540047，等待时长0:00:00.605033
+INFO     root:basepage.py:51 在标页面_投票成功弹窗-点击查看并激活，查找元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)
+INFO     root:basepage.py:78 在标页面_投票成功弹窗-点击查看并激活，点击元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)
+INFO     root:basepage.py:29 在 个人资料页_获取个人账户余额 等待元素(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:49.622244，结束等待时间点：2020-08-05 12:13:49.669945，等待时长0:00:00.047701
+INFO     root:basepage.py:51 在个人资料页_获取个人账户余额，查找元素(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)
+INFO     root:basepage.py:130 在个人资料页_获取个人账户余额，获取元素：(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)的文本:6138219474.77元
+INFO     root:test_invest.py:93 用户投标后6138219474.77
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:36.353204，结束等待时间点：2020-08-05 12:14:36.442044，等待时长0:00:00.088840
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)的文本:994.96
+INFO     root:test_invest.py:101 投后标额994.96
+INFO     root:test_invest.py:103 断言<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/Invest/test_invest.py::TestInverst::test_success_bid</td>
+          <td class="col-duration">133.66</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>INFO     root:conftest.py:24 开始执行用例---scope=&#x27;function&#x27;每个测试执行一次
+INFO     root:test_invest.py:24 实例化PO页面对象
+INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:20.711748，结束等待时间点：2020-08-05 12:12:20.810507，等待时长0:00:00.098759
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.276162，结束等待时间点：2020-08-05 12:12:21.352672，等待时长0:00:00.076510
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.612606，结束等待时间点：2020-08-05 12:12:21.659823，等待时长0:00:00.047217
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 首页_点击第一个抢投标按钮 等待元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.943372，结束等待时间点：2020-08-05 12:12:44.262207，等待时长0:00:22.318835
+INFO     root:basepage.py:51 在首页_点击第一个抢投标按钮，查找元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)
+INFO     root:basepage.py:78 在首页_点击第一个抢投标按钮，点击元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:11.999920，结束等待时间点：2020-08-05 12:13:12.132164，等待时长0:00:00.132244
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)的文本:995.16
+INFO     root:test_invest.py:78 投前标额995.16
+INFO     root:basepage.py:29 在 标页面_获取用户余额 等待元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.237807，结束等待时间点：2020-08-05 12:13:12.283092，等待时长0:00:00.045285
+INFO     root:basepage.py:51 在标页面_获取用户余额，查找元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)
+INFO     root:basepage.py:157 在标页面_获取用户余额，获取元素：(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)的属性data-amount值：6138221474.77
+INFO     root:test_invest.py:82 用户投标前6138221474.77
+INFO     root:basepage.py:29 在 标页面_输入投资金额 等待元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.314054，结束等待时间点：2020-08-05 12:13:12.348912，等待时长0:00:00.034858
+INFO     root:basepage.py:51 在标页面_输入投资金额，查找元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)
+INFO     root:basepage.py:103 在标页面_输入投资金额，给(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)元素，输入：2000
+INFO     root:basepage.py:29 在 标页面_点击“投标”按钮 等待元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.652381，结束等待时间点：2020-08-05 12:13:12.708224，等待时长0:00:00.055843
+INFO     root:basepage.py:51 在标页面_点击“投标”按钮，查找元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)
+INFO     root:basepage.py:78 在标页面_点击“投标”按钮，点击元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)
+INFO     root:test_invest.py:86 -------------------成功输入投资金额----------------------
+INFO     root:basepage.py:29 在 标页面_投票成功弹窗-点击查看并激活 等待元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.935014，结束等待时间点：2020-08-05 12:13:13.540047，等待时长0:00:00.605033
+INFO     root:basepage.py:51 在标页面_投票成功弹窗-点击查看并激活，查找元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)
+INFO     root:basepage.py:78 在标页面_投票成功弹窗-点击查看并激活，点击元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)
+INFO     root:basepage.py:29 在 个人资料页_获取个人账户余额 等待元素(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:49.622244，结束等待时间点：2020-08-05 12:13:49.669945，等待时长0:00:00.047701
+INFO     root:basepage.py:51 在个人资料页_获取个人账户余额，查找元素(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)
+INFO     root:basepage.py:130 在个人资料页_获取个人账户余额，获取元素：(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)的文本:6138219474.77元
+INFO     root:test_invest.py:93 用户投标后6138219474.77
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:36.353204，结束等待时间点：2020-08-05 12:14:36.442044，等待时长0:00:00.088840
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)的文本:994.96
+INFO     root:test_invest.py:101 投后标额994.96
+INFO     root:test_invest.py:103 断言<br/> -----------------------------Captured log teardown------------------------------ <br/>INFO     root:conftest.py:29 执行完成清理工作---每个测试类执行一次<br/> -------------------------------Captured log setup------------------------------- <br/>INFO     root:conftest.py:24 开始执行用例---scope=&#x27;function&#x27;每个测试执行一次
+INFO     root:test_invest.py:24 实例化PO页面对象
+INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:53.129384，结束等待时间点：2020-08-05 12:14:53.260322，等待时长0:00:00.130938
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:53.696307，结束等待时间点：2020-08-05 12:14:53.771864，等待时长0:00:00.075557
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:54.229639，结束等待时间点：2020-08-05 12:14:54.329284，等待时长0:00:00.099645
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 首页_点击第一个抢投标按钮 等待元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:54.550750，结束等待时间点：2020-08-05 12:15:16.932255，等待时长0:00:22.381505
+INFO     root:basepage.py:51 在首页_点击第一个抢投标按钮，查找元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)
+INFO     root:basepage.py:78 在首页_点击第一个抢投标按钮，点击元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;抢投标&#x27;]&quot;)
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:15:44.062288，结束等待时间点：2020-08-05 12:15:44.481292，等待时长0:00:00.419004
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)的文本:994.96
+INFO     root:test_invest.py:78 投前标额994.96
+INFO     root:basepage.py:29 在 标页面_获取用户余额 等待元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:15:44.520181，结束等待时间点：2020-08-05 12:15:44.556106，等待时长0:00:00.035925
+INFO     root:basepage.py:51 在标页面_获取用户余额，查找元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)
+INFO     root:basepage.py:157 在标页面_获取用户余额，获取元素：(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)的属性data-amount值：6138219474.77
+INFO     root:test_invest.py:82 用户投标前6138219474.77
+INFO     root:basepage.py:29 在 标页面_输入投资金额 等待元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:15:44.591293，结束等待时间点：2020-08-05 12:15:44.624260，等待时长0:00:00.032967
+INFO     root:basepage.py:51 在标页面_输入投资金额，查找元素(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)
+INFO     root:basepage.py:103 在标页面_输入投资金额，给(&#x27;xpath&#x27;, &quot;//input[@class=&#x27;form-control invest-unit-investinput&#x27;]&quot;)元素，输入：2000
+INFO     root:basepage.py:29 在 标页面_点击“投标”按钮 等待元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:15:45.066668，结束等待时间点：2020-08-05 12:15:45.120831，等待时长0:00:00.054163
+INFO     root:basepage.py:51 在标页面_点击“投标”按钮，查找元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)
+INFO     root:basepage.py:78 在标页面_点击“投标”按钮，点击元素(&#x27;xpath&#x27;, &quot;//button[@class=&#x27;btn btn-special height_style&#x27;]&quot;)
+INFO     root:test_invest.py:86 -------------------成功输入投资金额----------------------
+INFO     root:basepage.py:29 在 标页面_投票成功弹窗-点击查看并激活 等待元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:15:45.355244，结束等待时间点：2020-08-05 12:15:46.049092，等待时长0:00:00.693848
+INFO     root:basepage.py:51 在标页面_投票成功弹窗-点击查看并激活，查找元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)
+INFO     root:basepage.py:78 在标页面_投票成功弹窗-点击查看并激活，点击元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;投标成功！&#x27;]/following-sibling::div/button[text()=&#x27;查看并激活&#x27;]&quot;)
+INFO     root:basepage.py:29 在 个人资料页_获取个人账户余额 等待元素(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:16:21.712007，结束等待时间点：2020-08-05 12:16:21.775549，等待时长0:00:00.063542
+INFO     root:basepage.py:51 在个人资料页_获取个人账户余额，查找元素(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)
+INFO     root:basepage.py:130 在个人资料页_获取个人账户余额，获取元素：(&#x27;xpath&#x27;, &quot;//li[@class=&#x27;color_sub&#x27;]&quot;)的文本:6138217474.77元
+INFO     root:test_invest.py:93 用户投标后6138217474.77
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:08.077589，结束等待时间点：2020-08-05 12:17:08.145399，等待时长0:00:00.067810
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：(&#x27;xpath&#x27;, &quot;//span[@class=&#x27;mo_span4&#x27;]&quot;)的文本:994.76
+INFO     root:test_invest.py:101 投后标额994.76
+INFO     root:test_invest.py:103 断言<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_0_login_phone_false[data0]</td>
+          <td class="col-duration">1.13</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>INFO     root:conftest.py:12 开始执行用例---scope=&#x27;class&#x27;整个测试类只执行一次<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:19.692579，结束等待时间点：2020-08-05 12:17:19.754899，等待时长0:00:00.062320
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:19.924269，结束等待时间点：2020-08-05 12:17:20.020589，等待时长0:00:00.096320
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:20.385400，结束等待时间点：2020-08-05 12:17:20.437383，等待时长0:00:00.051983
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:test_login.py:35 ------输入的手机号是，输入的密码是python
+INFO     root:basepage.py:29 在 登录页面_获取登录区域提示信息 等待元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:20.721949，结束等待时间点：2020-08-05 12:17:20.771428，等待时长0:00:00.049479
+INFO     root:basepage.py:51 在登录页面_获取登录区域提示信息，查找元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)
+INFO     root:basepage.py:130 在登录页面_获取登录区域提示信息，获取元素：(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)的文本:请输入手机号<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_0_login_phone_false[data1]</td>
+          <td class="col-duration">1.07</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:21.458430，结束等待时间点：2020-08-05 12:17:21.496885，等待时长0:00:00.038455
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：1868472055
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:21.792783，结束等待时间点：2020-08-05 12:17:21.842133，等待时长0:00:00.049350
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:22.141518，结束等待时间点：2020-08-05 12:17:22.214574，等待时长0:00:00.073056
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:test_login.py:35 ------输入的手机号是1868472055，输入的密码是python
+INFO     root:basepage.py:29 在 登录页面_获取登录区域提示信息 等待元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:22.402093，结束等待时间点：2020-08-05 12:17:22.443115，等待时长0:00:00.041022
+INFO     root:basepage.py:51 在登录页面_获取登录区域提示信息，查找元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)
+INFO     root:basepage.py:130 在登录页面_获取登录区域提示信息，获取元素：(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)的文本:请输入正确的手机号<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_0_login_phone_false[data2]</td>
+          <td class="col-duration">0.94</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:23.319143，结束等待时间点：2020-08-05 12:17:23.358807，等待时长0:00:00.039664
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：186847205531
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:23.660355，结束等待时间点：2020-08-05 12:17:23.693442，等待时长0:00:00.033087
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:23.944470，结束等待时间点：2020-08-05 12:17:23.993136，等待时长0:00:00.048666
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:test_login.py:35 ------输入的手机号是186847205531，输入的密码是python
+INFO     root:basepage.py:29 在 登录页面_获取登录区域提示信息 等待元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:24.128115，结束等待时间点：2020-08-05 12:17:24.191923，等待时长0:00:00.063808
+INFO     root:basepage.py:51 在登录页面_获取登录区域提示信息，查找元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)
+INFO     root:basepage.py:130 在登录页面_获取登录区域提示信息，获取元素：(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)的文本:请输入正确的手机号<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_0_login_phone_false[data3]</td>
+          <td class="col-duration">1.67</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:24.847075，结束等待时间点：2020-08-05 12:17:24.898794，等待时长0:00:00.051719
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：11184720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:25.293883，结束等待时间点：2020-08-05 12:17:25.474809，等待时长0:00:00.180926
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:26.013454，结束等待时间点：2020-08-05 12:17:26.104555，等待时长0:00:00.091101
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:test_login.py:35 ------输入的手机号是11184720553，输入的密码是python
+INFO     root:basepage.py:29 在 登录页面_获取登录区域提示信息 等待元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:26.276411，结束等待时间点：2020-08-05 12:17:26.378501，等待时长0:00:00.102090
+INFO     root:basepage.py:51 在登录页面_获取登录区域提示信息，查找元素(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)
+INFO     root:basepage.py:130 在登录页面_获取登录区域提示信息，获取元素：(&#x27;class name&#x27;, &#x27;form-error-info&#x27;)的文本:请输入正确的手机号<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_1_login_passwd_false[data0]</td>
+          <td class="col-duration">1.37</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:27.251259，结束等待时间点：2020-08-05 12:17:27.296134，等待时长0:00:00.044875
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:27.578362，结束等待时间点：2020-08-05 12:17:27.616538，等待时长0:00:00.038176
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：111111
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:27.832765，结束等待时间点：2020-08-05 12:17:27.880040，等待时长0:00:00.047275
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:29 在 登录页面_获取登录页面中间提示信息 等待元素(&#x27;class name&#x27;, &#x27;layui-layer-content&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:28.010212，结束等待时间点：2020-08-05 12:17:28.580313，等待时长0:00:00.570101
+INFO     root:basepage.py:51 在登录页面_获取登录页面中间提示信息，查找元素(&#x27;class name&#x27;, &#x27;layui-layer-content&#x27;)
+INFO     root:basepage.py:130 在登录页面_获取登录页面中间提示信息，获取元素：(&#x27;class name&#x27;, &#x27;layui-layer-content&#x27;)的文本:帐号或密码错误!<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_1_login_passwd_false[data1]</td>
+          <td class="col-duration">1.30</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:29.254274，结束等待时间点：2020-08-05 12:17:29.300076，等待时长0:00:00.045802
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:29.588069，结束等待时间点：2020-08-05 12:17:29.622291，等待时长0:00:00.034222
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：pytho
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:29.832425，结束等待时间点：2020-08-05 12:17:29.869134，等待时长0:00:00.036709
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:29 在 登录页面_获取登录页面中间提示信息 等待元素(&#x27;class name&#x27;, &#x27;layui-layer-content&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:29.970170，结束等待时间点：2020-08-05 12:17:30.516306，等待时长0:00:00.546136
+INFO     root:basepage.py:51 在登录页面_获取登录页面中间提示信息，查找元素(&#x27;class name&#x27;, &#x27;layui-layer-content&#x27;)
+INFO     root:basepage.py:130 在登录页面_获取登录页面中间提示信息，获取元素：(&#x27;class name&#x27;, &#x27;layui-layer-content&#x27;)的文本:帐号或密码错误!<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_1_Login::test_2_login_True[item0]</td>
+          <td class="col-duration">23.96</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:31.199994，结束等待时间点：2020-08-05 12:17:31.239703，等待时长0:00:00.039709
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入帐号，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;phone&#x27;]&quot;)元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:31.832286，结束等待时间点：2020-08-05 12:17:31.939584，等待时长0:00:00.107298
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)
+INFO     root:basepage.py:103 在登录页面_输入密码，给(&#x27;xpath&#x27;, &quot;//input[@name=&#x27;password&#x27;]&quot;)元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:32.298330，结束等待时间点：2020-08-05 12:17:32.338325，等待时长0:00:00.039995
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素(&#x27;xpath&#x27;, &quot;//button[text()=&#x27;登录&#x27;]&quot;)
+INFO     root:basepage.py:29 在 首页_等待退出按钮出现 等待元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;退出&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:32.484972，结束等待时间点：2020-08-05 12:17:55.120356，等待时长0:00:22.635384
+INFO     root:basepage.py:29 在 首页_等待退出按钮出现 等待元素(&#x27;xpath&#x27;, &quot;//a[text()=&#x27;退出&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:17:55.120658，结束等待时间点：2020-08-05 12:17:55.162064，等待时长0:00:00.041406
+INFO     root:test_login.py:56 断言成功，实际结果为True<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">TestCases/login/test_login.py::Test_2_Link::test_register_ent</td>
+          <td class="col-duration">1.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>INFO     root:conftest.py:12 开始执行用例---scope=&#x27;class&#x27;整个测试类只执行一次<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:basepage.py:29 在 登录页面_点击注册按钮 等待元素(&#x27;xpath&#x27;, &#x27;//a[@href=&quot;/Index/reg.html&quot;]&#x27;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:18:08.862273，结束等待时间点：2020-08-05 12:18:08.926629，等待时长0:00:00.064356
+INFO     root:basepage.py:51 在登录页面_点击注册按钮，查找元素(&#x27;xpath&#x27;, &#x27;//a[@href=&quot;/Index/reg.html&quot;]&#x27;)
+INFO     root:basepage.py:78 在登录页面_点击注册按钮，点击元素(&#x27;xpath&#x27;, &#x27;//a[@href=&quot;/Index/reg.html&quot;]&#x27;)
+INFO     root:basepage.py:29 在 注册页面_获取注册页面标题 等待元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;注册&#x27;]&quot;)可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:18:09.777682，结束等待时间点：2020-08-05 12:18:09.842126，等待时长0:00:00.064444
+INFO     root:basepage.py:51 在注册页面_获取注册页面标题，查找元素(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;注册&#x27;]&quot;)
+INFO     root:basepage.py:130 在注册页面_获取注册页面标题，获取元素：(&#x27;xpath&#x27;, &quot;//div[text()=&#x27;注册&#x27;]&quot;)的文本:注册<br/></div></td></tr></tbody></table></body></html>

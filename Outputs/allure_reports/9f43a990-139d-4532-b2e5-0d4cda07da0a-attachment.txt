@@ -1,0 +1,53 @@
+INFO     root:conftest.py:24 开始执行用例---scope='function'每个测试执行一次
+INFO     root:test_invest.py:24 实例化PO页面对象
+INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:20.711748，结束等待时间点：2020-08-05 12:12:20.810507，等待时长0:00:00.098759
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+INFO     root:basepage.py:103 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.276162，结束等待时间点：2020-08-05 12:12:21.352672，等待时长0:00:00.076510
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+INFO     root:basepage.py:103 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.612606，结束等待时间点：2020-08-05 12:12:21.659823，等待时长0:00:00.047217
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+INFO     root:basepage.py:29 在 首页_点击第一个抢投标按钮 等待元素('xpath', "//a[text()='抢投标']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:12:21.943372，结束等待时间点：2020-08-05 12:12:44.262207，等待时长0:00:22.318835
+INFO     root:basepage.py:51 在首页_点击第一个抢投标按钮，查找元素('xpath', "//a[text()='抢投标']")
+INFO     root:basepage.py:78 在首页_点击第一个抢投标按钮，点击元素('xpath', "//a[text()='抢投标']")
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素('xpath', "//span[@class='mo_span4']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:11.999920，结束等待时间点：2020-08-05 12:13:12.132164，等待时长0:00:00.132244
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素('xpath', "//span[@class='mo_span4']")
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：('xpath', "//span[@class='mo_span4']")的文本:995.16
+INFO     root:test_invest.py:78 投前标额995.16
+INFO     root:basepage.py:29 在 标页面_获取用户余额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.237807，结束等待时间点：2020-08-05 12:13:12.283092，等待时长0:00:00.045285
+INFO     root:basepage.py:51 在标页面_获取用户余额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+INFO     root:basepage.py:157 在标页面_获取用户余额，获取元素：('xpath', "//input[@class='form-control invest-unit-investinput']")的属性data-amount值：6138221474.77
+INFO     root:test_invest.py:82 用户投标前6138221474.77
+INFO     root:basepage.py:29 在 标页面_输入投资金额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.314054，结束等待时间点：2020-08-05 12:13:12.348912，等待时长0:00:00.034858
+INFO     root:basepage.py:51 在标页面_输入投资金额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+INFO     root:basepage.py:103 在标页面_输入投资金额，给('xpath', "//input[@class='form-control invest-unit-investinput']")元素，输入：2000
+INFO     root:basepage.py:29 在 标页面_点击“投标”按钮 等待元素('xpath', "//button[@class='btn btn-special height_style']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.652381，结束等待时间点：2020-08-05 12:13:12.708224，等待时长0:00:00.055843
+INFO     root:basepage.py:51 在标页面_点击“投标”按钮，查找元素('xpath', "//button[@class='btn btn-special height_style']")
+INFO     root:basepage.py:78 在标页面_点击“投标”按钮，点击元素('xpath', "//button[@class='btn btn-special height_style']")
+INFO     root:test_invest.py:86 -------------------成功输入投资金额----------------------
+INFO     root:basepage.py:29 在 标页面_投票成功弹窗-点击查看并激活 等待元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:12.935014，结束等待时间点：2020-08-05 12:13:13.540047，等待时长0:00:00.605033
+INFO     root:basepage.py:51 在标页面_投票成功弹窗-点击查看并激活，查找元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")
+INFO     root:basepage.py:78 在标页面_投票成功弹窗-点击查看并激活，点击元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")
+INFO     root:basepage.py:29 在 个人资料页_获取个人账户余额 等待元素('xpath', "//li[@class='color_sub']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:13:49.622244，结束等待时间点：2020-08-05 12:13:49.669945，等待时长0:00:00.047701
+INFO     root:basepage.py:51 在个人资料页_获取个人账户余额，查找元素('xpath', "//li[@class='color_sub']")
+INFO     root:basepage.py:130 在个人资料页_获取个人账户余额，获取元素：('xpath', "//li[@class='color_sub']")的文本:6138219474.77元
+INFO     root:test_invest.py:93 用户投标后6138219474.77
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素('xpath', "//span[@class='mo_span4']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-05 12:14:36.353204，结束等待时间点：2020-08-05 12:14:36.442044，等待时长0:00:00.088840
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素('xpath', "//span[@class='mo_span4']")
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：('xpath', "//span[@class='mo_span4']")的文本:994.96
+INFO     root:test_invest.py:101 投后标额994.96
+INFO     root:test_invest.py:103 断言
+INFO     root:conftest.py:29 执行完成清理工作---每个测试类执行一次
