@@ -1,0 +1,48 @@
+INFO     root:conftest.py:24 开始执行用例---scope='function'每个测试执行一次
+INFO     root:test_invest.py:24 实例化PO页面对象
+INFO     root:basepage.py:29 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:07.071089，结束等待时间点：2020-08-07 19:39:07.106995，等待时长0:00:00.035906
+INFO     root:basepage.py:51 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+INFO     root:basepage.py:103 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+INFO     root:basepage.py:29 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:07.230754，结束等待时间点：2020-08-07 19:39:07.271817，等待时长0:00:00.041063
+INFO     root:basepage.py:51 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+INFO     root:basepage.py:103 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+INFO     root:basepage.py:29 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:07.380827，结束等待时间点：2020-08-07 19:39:07.413753，等待时长0:00:00.032926
+INFO     root:basepage.py:51 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+INFO     root:basepage.py:78 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+INFO     root:basepage.py:29 在 首页_点击第一个抢投标按钮 等待元素('xpath', "//a[text()='抢投标']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:07.497888，结束等待时间点：2020-08-07 19:39:30.131876，等待时长0:00:22.633988
+INFO     root:basepage.py:51 在首页_点击第一个抢投标按钮，查找元素('xpath', "//a[text()='抢投标']")
+INFO     root:basepage.py:78 在首页_点击第一个抢投标按钮，点击元素('xpath', "//a[text()='抢投标']")
+INFO     root:basepage.py:29 在 标页面_获取标可投金额 等待元素('xpath', "//span[@class='mo_span4']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:57.114583，结束等待时间点：2020-08-07 19:39:57.233725，等待时长0:00:00.119142
+INFO     root:basepage.py:51 在标页面_获取标可投金额，查找元素('xpath', "//span[@class='mo_span4']")
+INFO     root:basepage.py:130 在标页面_获取标可投金额，获取元素：('xpath', "//span[@class='mo_span4']")的文本:800
+INFO     root:test_invest.py:78 投前标额800.0
+INFO     root:basepage.py:29 在 标页面_获取用户余额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:57.378265，结束等待时间点：2020-08-07 19:39:57.428175，等待时长0:00:00.049910
+INFO     root:basepage.py:51 在标页面_获取用户余额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+INFO     root:basepage.py:157 在标页面_获取用户余额，获取元素：('xpath', "//input[@class='form-control invest-unit-investinput']")的属性data-amount值：6138264121.62
+INFO     root:test_invest.py:82 用户投标前6138264121.62
+INFO     root:basepage.py:29 在 标页面_输入投资金额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:57.452204，结束等待时间点：2020-08-07 19:39:57.478606，等待时长0:00:00.026402
+INFO     root:basepage.py:51 在标页面_输入投资金额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+INFO     root:basepage.py:103 在标页面_输入投资金额，给('xpath', "//input[@class='form-control invest-unit-investinput']")元素，输入：2000
+INFO     root:basepage.py:29 在 标页面_点击“投标”按钮 等待元素('xpath', "//button[@class='btn btn-special height_style']")可见
+INFO     root:basepage.py:36 开始等待时间点：2020-08-07 19:39:57.665241，结束等待时间点：2020-08-07 19:39:57.711768，等待时长0:00:00.046527
+INFO     root:basepage.py:51 在标页面_点击“投标”按钮，查找元素('xpath', "//button[@class='btn btn-special height_style']")
+INFO     root:basepage.py:78 在标页面_点击“投标”按钮，点击元素('xpath', "//button[@class='btn btn-special height_style']")
+INFO     root:test_invest.py:86 -------------------成功输入投资金额----------------------
+INFO     root:basepage.py:29 在 标页面_投票成功弹窗-点击查看并激活 等待元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")可见
+ERROR    root:basepage.py:38 等待元素可见失败：
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\qcd_webAuto_pytest\Common\basepage.py", line 33, in wait_eleVisible
+    WebDriverWait(self.driver,timeout,poll_frequency).until(EC.visibility_of_element_located(loc))
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+INFO     root:basepage.py:182 截图成功，图标保存在C:\Users\admin\Desktop\qcd_webAuto_pytest\Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 19_40_28.png
+INFO     root:conftest.py:29 执行完成清理工作---每个测试类执行一次

@@ -1,0 +1,10 @@
+ 2020-08-07 20:10:19,669  INFO conftest.py init_driver_cls [ line:12 ] 开始执行用例---scope='class'整个测试类只执行一次
+ 2020-08-07 20:10:27,993  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击注册按钮 等待元素('xpath', '//a[@href="/Index/reg.html"]')可见
+ 2020-08-07 20:10:28,043  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 20:10:27.993148，结束等待时间点：2020-08-07 20:10:28.042229，等待时长0:00:00.049081
+ 2020-08-07 20:10:28,043  INFO basepage.py get_element [ line:51 ] 在登录页面_点击注册按钮，查找元素('xpath', '//a[@href="/Index/reg.html"]')
+ 2020-08-07 20:10:28,054  INFO basepage.py click_element [ line:78 ] 在登录页面_点击注册按钮，点击元素('xpath', '//a[@href="/Index/reg.html"]')
+ 2020-08-07 20:10:28,535  INFO basepage.py wait_eleVisible [ line:29 ] 在 注册页面_获取注册页面标题 等待元素('xpath', "//div[text()='注册']")可见
+ 2020-08-07 20:10:28,577  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 20:10:28.535017，结束等待时间点：2020-08-07 20:10:28.577904，等待时长0:00:00.042887
+ 2020-08-07 20:10:28,577  INFO basepage.py get_element [ line:51 ] 在注册页面_获取注册页面标题，查找元素('xpath', "//div[text()='注册']")
+ 2020-08-07 20:10:28,607  INFO basepage.py get_element_text [ line:130 ] 在注册页面_获取注册页面标题，获取元素：('xpath', "//div[text()='注册']")的文本:注册
+ 2020-08-07 20:10:28,610  INFO conftest.py init_driver_cls [ line:17 ] 执行完成清理工作---整个测试类只执行一次

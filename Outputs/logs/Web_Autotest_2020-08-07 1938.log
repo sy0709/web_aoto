@@ -1,0 +1,273 @@
+ 2020-08-07 19:38:59,428  INFO conftest.py init_driver_fun [ line:24 ] 开始执行用例---scope='function'每个测试执行一次
+ 2020-08-07 19:39:07,068  INFO test_invest.py init [ line:24 ] 实例化PO页面对象
+ 2020-08-07 19:39:07,071  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:39:07,106  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:07.071089，结束等待时间点：2020-08-07 19:39:07.106995，等待时长0:00:00.035906
+ 2020-08-07 19:39:07,108  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:39:07,116  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+ 2020-08-07 19:39:07,230  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:39:07,271  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:07.230754，结束等待时间点：2020-08-07 19:39:07.271817，等待时长0:00:00.041063
+ 2020-08-07 19:39:07,271  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:39:07,282  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:39:07,379  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:39:07,413  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:07.380827，结束等待时间点：2020-08-07 19:39:07.413753，等待时长0:00:00.032926
+ 2020-08-07 19:39:07,414  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:39:07,424  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:39:07,497  INFO basepage.py wait_eleVisible [ line:29 ] 在 首页_点击第一个抢投标按钮 等待元素('xpath', "//a[text()='抢投标']")可见
+ 2020-08-07 19:39:30,131  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:07.497888，结束等待时间点：2020-08-07 19:39:30.131876，等待时长0:00:22.633988
+ 2020-08-07 19:39:30,133  INFO basepage.py get_element [ line:51 ] 在首页_点击第一个抢投标按钮，查找元素('xpath', "//a[text()='抢投标']")
+ 2020-08-07 19:39:30,153  INFO basepage.py click_element [ line:78 ] 在首页_点击第一个抢投标按钮，点击元素('xpath', "//a[text()='抢投标']")
+ 2020-08-07 19:39:57,113  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_获取标可投金额 等待元素('xpath', "//span[@class='mo_span4']")可见
+ 2020-08-07 19:39:57,234  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:57.114583，结束等待时间点：2020-08-07 19:39:57.233725，等待时长0:00:00.119142
+ 2020-08-07 19:39:57,235  INFO basepage.py get_element [ line:51 ] 在标页面_获取标可投金额，查找元素('xpath', "//span[@class='mo_span4']")
+ 2020-08-07 19:39:57,377  INFO basepage.py get_element_text [ line:130 ] 在标页面_获取标可投金额，获取元素：('xpath', "//span[@class='mo_span4']")的文本:800
+ 2020-08-07 19:39:57,378  INFO test_invest.py test_success_bid [ line:78 ] 投前标额800.0
+ 2020-08-07 19:39:57,378  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_获取用户余额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+ 2020-08-07 19:39:57,428  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:57.378265，结束等待时间点：2020-08-07 19:39:57.428175，等待时长0:00:00.049910
+ 2020-08-07 19:39:57,429  INFO basepage.py get_element [ line:51 ] 在标页面_获取用户余额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+ 2020-08-07 19:39:57,451  INFO basepage.py get_element_attr [ line:157 ] 在标页面_获取用户余额，获取元素：('xpath', "//input[@class='form-control invest-unit-investinput']")的属性data-amount值：6138264121.62
+ 2020-08-07 19:39:57,452  INFO test_invest.py test_success_bid [ line:82 ] 用户投标前6138264121.62
+ 2020-08-07 19:39:57,452  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_输入投资金额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+ 2020-08-07 19:39:57,478  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:57.452204，结束等待时间点：2020-08-07 19:39:57.478606，等待时长0:00:00.026402
+ 2020-08-07 19:39:57,478  INFO basepage.py get_element [ line:51 ] 在标页面_输入投资金额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+ 2020-08-07 19:39:57,492  INFO basepage.py input_text [ line:103 ] 在标页面_输入投资金额，给('xpath', "//input[@class='form-control invest-unit-investinput']")元素，输入：2000
+ 2020-08-07 19:39:57,664  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_点击“投标”按钮 等待元素('xpath', "//button[@class='btn btn-special height_style']")可见
+ 2020-08-07 19:39:57,711  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:39:57.665241，结束等待时间点：2020-08-07 19:39:57.711768，等待时长0:00:00.046527
+ 2020-08-07 19:39:57,712  INFO basepage.py get_element [ line:51 ] 在标页面_点击“投标”按钮，查找元素('xpath', "//button[@class='btn btn-special height_style']")
+ 2020-08-07 19:39:57,726  INFO basepage.py click_element [ line:78 ] 在标页面_点击“投标”按钮，点击元素('xpath', "//button[@class='btn btn-special height_style']")
+ 2020-08-07 19:39:57,831  INFO test_invest.py test_success_bid [ line:86 ] -------------------成功输入投资金额----------------------
+ 2020-08-07 19:39:57,831  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_投票成功弹窗-点击查看并激活 等待元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")可见
+ 2020-08-07 19:40:28,134  ERROR basepage.py wait_eleVisible [ line:38 ] 等待元素可见失败：
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\qcd_webAuto_pytest\Common\basepage.py", line 33, in wait_eleVisible
+    WebDriverWait(self.driver,timeout,poll_frequency).until(EC.visibility_of_element_located(loc))
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+ 2020-08-07 19:40:28,503  INFO basepage.py save_web_screenshot [ line:182 ] 截图成功，图标保存在C:\Users\admin\Desktop\qcd_webAuto_pytest\Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 19_40_28.png
+ 2020-08-07 19:40:28,575  INFO conftest.py init_driver_fun [ line:29 ] 执行完成清理工作---每个测试类执行一次
+ 2020-08-07 19:40:35,706  INFO conftest.py init_driver_fun [ line:24 ] 开始执行用例---scope='function'每个测试执行一次
+ 2020-08-07 19:40:42,472  INFO test_invest.py init [ line:24 ] 实例化PO页面对象
+ 2020-08-07 19:40:42,473  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:40:42,525  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:40:42.473802，结束等待时间点：2020-08-07 19:40:42.525612，等待时长0:00:00.051810
+ 2020-08-07 19:40:42,525  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:40:42,534  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+ 2020-08-07 19:40:42,674  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:40:42,716  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:40:42.674503，结束等待时间点：2020-08-07 19:40:42.716089，等待时长0:00:00.041586
+ 2020-08-07 19:40:42,716  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:40:42,727  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:40:42,825  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:40:42,875  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:40:42.826930，结束等待时间点：2020-08-07 19:40:42.875659，等待时长0:00:00.048729
+ 2020-08-07 19:40:42,875  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:40:42,931  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:40:43,163  INFO basepage.py wait_eleVisible [ line:29 ] 在 首页_点击第一个抢投标按钮 等待元素('xpath', "//a[text()='抢投标']")可见
+ 2020-08-07 19:41:05,829  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:40:43.164056，结束等待时间点：2020-08-07 19:41:05.829923，等待时长0:00:22.665867
+ 2020-08-07 19:41:05,831  INFO basepage.py get_element [ line:51 ] 在首页_点击第一个抢投标按钮，查找元素('xpath', "//a[text()='抢投标']")
+ 2020-08-07 19:41:05,847  INFO basepage.py click_element [ line:78 ] 在首页_点击第一个抢投标按钮，点击元素('xpath', "//a[text()='抢投标']")
+ 2020-08-07 19:41:32,798  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_获取标可投金额 等待元素('xpath', "//span[@class='mo_span4']")可见
+ 2020-08-07 19:41:32,934  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:41:32.800225，结束等待时间点：2020-08-07 19:41:32.934033，等待时长0:00:00.133808
+ 2020-08-07 19:41:32,935  INFO basepage.py get_element [ line:51 ] 在标页面_获取标可投金额，查找元素('xpath', "//span[@class='mo_span4']")
+ 2020-08-07 19:41:32,966  INFO basepage.py get_element_text [ line:130 ] 在标页面_获取标可投金额，获取元素：('xpath', "//span[@class='mo_span4']")的文本:800
+ 2020-08-07 19:41:32,966  INFO test_invest.py test_success_bid [ line:78 ] 投前标额800.0
+ 2020-08-07 19:41:32,966  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_获取用户余额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+ 2020-08-07 19:41:32,994  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:41:32.966946，结束等待时间点：2020-08-07 19:41:32.994872，等待时长0:00:00.027926
+ 2020-08-07 19:41:32,995  INFO basepage.py get_element [ line:51 ] 在标页面_获取用户余额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+ 2020-08-07 19:41:33,015  INFO basepage.py get_element_attr [ line:157 ] 在标页面_获取用户余额，获取元素：('xpath', "//input[@class='form-control invest-unit-investinput']")的属性data-amount值：6138264121.62
+ 2020-08-07 19:41:33,015  INFO test_invest.py test_success_bid [ line:82 ] 用户投标前6138264121.62
+ 2020-08-07 19:41:33,015  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_输入投资金额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+ 2020-08-07 19:41:33,042  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:41:33.016379，结束等待时间点：2020-08-07 19:41:33.042338，等待时长0:00:00.025959
+ 2020-08-07 19:41:33,042  INFO basepage.py get_element [ line:51 ] 在标页面_输入投资金额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+ 2020-08-07 19:41:33,051  INFO basepage.py input_text [ line:103 ] 在标页面_输入投资金额，给('xpath', "//input[@class='form-control invest-unit-investinput']")元素，输入：2000
+ 2020-08-07 19:41:33,175  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_点击“投标”按钮 等待元素('xpath', "//button[@class='btn btn-special height_style']")可见
+ 2020-08-07 19:41:33,213  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:41:33.176556，结束等待时间点：2020-08-07 19:41:33.213455，等待时长0:00:00.036899
+ 2020-08-07 19:41:33,213  INFO basepage.py get_element [ line:51 ] 在标页面_点击“投标”按钮，查找元素('xpath', "//button[@class='btn btn-special height_style']")
+ 2020-08-07 19:41:33,224  INFO basepage.py click_element [ line:78 ] 在标页面_点击“投标”按钮，点击元素('xpath', "//button[@class='btn btn-special height_style']")
+ 2020-08-07 19:41:33,297  INFO test_invest.py test_success_bid [ line:86 ] -------------------成功输入投资金额----------------------
+ 2020-08-07 19:41:33,297  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_投票成功弹窗-点击查看并激活 等待元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")可见
+ 2020-08-07 19:42:03,573  ERROR basepage.py wait_eleVisible [ line:38 ] 等待元素可见失败：
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\qcd_webAuto_pytest\Common\basepage.py", line 33, in wait_eleVisible
+    WebDriverWait(self.driver,timeout,poll_frequency).until(EC.visibility_of_element_located(loc))
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+ 2020-08-07 19:42:03,891  INFO basepage.py save_web_screenshot [ line:182 ] 截图成功，图标保存在C:\Users\admin\Desktop\qcd_webAuto_pytest\Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 19_42_03.png
+ 2020-08-07 19:42:03,935  INFO conftest.py init_driver_fun [ line:29 ] 执行完成清理工作---每个测试类执行一次
+ 2020-08-07 19:42:11,119  INFO conftest.py init_driver_fun [ line:24 ] 开始执行用例---scope='function'每个测试执行一次
+ 2020-08-07 19:42:17,947  INFO test_invest.py init [ line:24 ] 实例化PO页面对象
+ 2020-08-07 19:42:17,947  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:42:17,994  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:42:17.947025，结束等待时间点：2020-08-07 19:42:17.994098，等待时长0:00:00.047073
+ 2020-08-07 19:42:17,994  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:42:18,003  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+ 2020-08-07 19:42:18,129  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:42:18,172  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:42:18.130928，结束等待时间点：2020-08-07 19:42:18.172894，等待时长0:00:00.041966
+ 2020-08-07 19:42:18,173  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:42:18,184  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:42:18,283  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:42:18,320  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:42:18.284151，结束等待时间点：2020-08-07 19:42:18.320056，等待时长0:00:00.035905
+ 2020-08-07 19:42:18,320  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:42:18,331  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:42:18,421  INFO basepage.py wait_eleVisible [ line:29 ] 在 首页_点击第一个抢投标按钮 等待元素('xpath', "//a[text()='抢投标']")可见
+ 2020-08-07 19:42:40,448  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:42:18.421543，结束等待时间点：2020-08-07 19:42:40.448960，等待时长0:00:22.027417
+ 2020-08-07 19:42:40,450  INFO basepage.py get_element [ line:51 ] 在首页_点击第一个抢投标按钮，查找元素('xpath', "//a[text()='抢投标']")
+ 2020-08-07 19:42:40,478  INFO basepage.py click_element [ line:78 ] 在首页_点击第一个抢投标按钮，点击元素('xpath', "//a[text()='抢投标']")
+ 2020-08-07 19:43:07,262  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_获取标可投金额 等待元素('xpath', "//span[@class='mo_span4']")可见
+ 2020-08-07 19:43:07,359  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:07.263151，结束等待时间点：2020-08-07 19:43:07.359493，等待时长0:00:00.096342
+ 2020-08-07 19:43:07,360  INFO basepage.py get_element [ line:51 ] 在标页面_获取标可投金额，查找元素('xpath', "//span[@class='mo_span4']")
+ 2020-08-07 19:43:07,470  INFO basepage.py get_element_text [ line:130 ] 在标页面_获取标可投金额，获取元素：('xpath', "//span[@class='mo_span4']")的文本:800
+ 2020-08-07 19:43:07,471  INFO test_invest.py test_success_bid [ line:78 ] 投前标额800.0
+ 2020-08-07 19:43:07,471  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_获取用户余额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+ 2020-08-07 19:43:07,520  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:07.471820，结束等待时间点：2020-08-07 19:43:07.520647，等待时长0:00:00.048827
+ 2020-08-07 19:43:07,520  INFO basepage.py get_element [ line:51 ] 在标页面_获取用户余额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+ 2020-08-07 19:43:07,538  INFO basepage.py get_element_attr [ line:157 ] 在标页面_获取用户余额，获取元素：('xpath', "//input[@class='form-control invest-unit-investinput']")的属性data-amount值：6138264121.62
+ 2020-08-07 19:43:07,538  INFO test_invest.py test_success_bid [ line:82 ] 用户投标前6138264121.62
+ 2020-08-07 19:43:07,538  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_输入投资金额 等待元素('xpath', "//input[@class='form-control invest-unit-investinput']")可见
+ 2020-08-07 19:43:07,561  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:07.539594，结束等待时间点：2020-08-07 19:43:07.561535，等待时长0:00:00.021941
+ 2020-08-07 19:43:07,562  INFO basepage.py get_element [ line:51 ] 在标页面_输入投资金额，查找元素('xpath', "//input[@class='form-control invest-unit-investinput']")
+ 2020-08-07 19:43:07,570  INFO basepage.py input_text [ line:103 ] 在标页面_输入投资金额，给('xpath', "//input[@class='form-control invest-unit-investinput']")元素，输入：2000
+ 2020-08-07 19:43:07,688  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_点击“投标”按钮 等待元素('xpath', "//button[@class='btn btn-special height_style']")可见
+ 2020-08-07 19:43:07,721  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:07.689294，结束等待时间点：2020-08-07 19:43:07.721110，等待时长0:00:00.031816
+ 2020-08-07 19:43:07,721  INFO basepage.py get_element [ line:51 ] 在标页面_点击“投标”按钮，查找元素('xpath', "//button[@class='btn btn-special height_style']")
+ 2020-08-07 19:43:07,728  INFO basepage.py click_element [ line:78 ] 在标页面_点击“投标”按钮，点击元素('xpath', "//button[@class='btn btn-special height_style']")
+ 2020-08-07 19:43:07,792  INFO test_invest.py test_success_bid [ line:86 ] -------------------成功输入投资金额----------------------
+ 2020-08-07 19:43:07,793  INFO basepage.py wait_eleVisible [ line:29 ] 在 标页面_投票成功弹窗-点击查看并激活 等待元素('xpath', "//div[text()='投标成功！']/following-sibling::div/button[text()='查看并激活']")可见
+ 2020-08-07 19:43:38,022  ERROR basepage.py wait_eleVisible [ line:38 ] 等待元素可见失败：
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\qcd_webAuto_pytest\Common\basepage.py", line 33, in wait_eleVisible
+    WebDriverWait(self.driver,timeout,poll_frequency).until(EC.visibility_of_element_located(loc))
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+ 2020-08-07 19:43:38,337  INFO basepage.py save_web_screenshot [ line:182 ] 截图成功，图标保存在C:\Users\admin\Desktop\qcd_webAuto_pytest\Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 19_43_38.png
+ 2020-08-07 19:43:38,356  INFO conftest.py init_driver_fun [ line:29 ] 执行完成清理工作---每个测试类执行一次
+ 2020-08-07 19:43:40,528  INFO conftest.py init_driver_cls [ line:12 ] 开始执行用例---scope='class'整个测试类只执行一次
+ 2020-08-07 19:43:48,044  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:48,096  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:48.044127，结束等待时间点：2020-08-07 19:43:48.095987，等待时长0:00:00.051860
+ 2020-08-07 19:43:48,097  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:48,106  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：
+ 2020-08-07 19:43:48,181  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:48,223  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:48.181907，结束等待时间点：2020-08-07 19:43:48.223775，等待时长0:00:00.041868
+ 2020-08-07 19:43:48,223  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:48,233  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:43:48,373  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:48,420  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:48.374460，结束等待时间点：2020-08-07 19:43:48.420519，等待时长0:00:00.046059
+ 2020-08-07 19:43:48,421  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:48,434  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:48,548  INFO test_login.py test_0_login_phone_false [ line:35 ] ------输入的手机号是，输入的密码是python
+ 2020-08-07 19:43:48,548  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_获取登录区域提示信息 等待元素('class name', 'form-error-info')可见
+ 2020-08-07 19:43:48,589  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:48.548749，结束等待时间点：2020-08-07 19:43:48.589639，等待时长0:00:00.040890
+ 2020-08-07 19:43:48,590  INFO basepage.py get_element [ line:51 ] 在登录页面_获取登录区域提示信息，查找元素('class name', 'form-error-info')
+ 2020-08-07 19:43:48,636  INFO basepage.py get_element_text [ line:130 ] 在登录页面_获取登录区域提示信息，获取元素：('class name', 'form-error-info')的文本:请输入手机号
+ 2020-08-07 19:43:49,098  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:49,125  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:49.098949，结束等待时间点：2020-08-07 19:43:49.125877，等待时长0:00:00.026928
+ 2020-08-07 19:43:49,125  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:49,135  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：1868472055
+ 2020-08-07 19:43:49,259  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:49,287  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:49.259202，结束等待时间点：2020-08-07 19:43:49.287128，等待时长0:00:00.027926
+ 2020-08-07 19:43:49,287  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:49,298  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:43:49,423  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:49,483  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:49.423941，结束等待时间点：2020-08-07 19:43:49.483470，等待时长0:00:00.059529
+ 2020-08-07 19:43:49,484  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:49,498  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:49,573  INFO test_login.py test_0_login_phone_false [ line:35 ] ------输入的手机号是1868472055，输入的密码是python
+ 2020-08-07 19:43:49,574  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_获取登录区域提示信息 等待元素('class name', 'form-error-info')可见
+ 2020-08-07 19:43:49,599  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:49.574453，结束等待时间点：2020-08-07 19:43:49.598283，等待时长0:00:00.023830
+ 2020-08-07 19:43:49,599  INFO basepage.py get_element [ line:51 ] 在登录页面_获取登录区域提示信息，查找元素('class name', 'form-error-info')
+ 2020-08-07 19:43:49,633  INFO basepage.py get_element_text [ line:130 ] 在登录页面_获取登录区域提示信息，获取元素：('class name', 'form-error-info')的文本:请输入正确的手机号
+ 2020-08-07 19:43:50,157  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:50,585  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:50.158405，结束等待时间点：2020-08-07 19:43:50.585669，等待时长0:00:00.427264
+ 2020-08-07 19:43:50,585  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:50,620  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：186847205531
+ 2020-08-07 19:43:50,942  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:50,975  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:50.942785，结束等待时间点：2020-08-07 19:43:50.975015，等待时长0:00:00.032230
+ 2020-08-07 19:43:50,976  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:50,989  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:43:51,174  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:51,204  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:51.174196，结束等待时间点：2020-08-07 19:43:51.204306，等待时长0:00:00.030110
+ 2020-08-07 19:43:51,204  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:51,215  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:51,319  INFO test_login.py test_0_login_phone_false [ line:35 ] ------输入的手机号是186847205531，输入的密码是python
+ 2020-08-07 19:43:51,319  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_获取登录区域提示信息 等待元素('class name', 'form-error-info')可见
+ 2020-08-07 19:43:51,359  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:51.319584，结束等待时间点：2020-08-07 19:43:51.359395，等待时长0:00:00.039811
+ 2020-08-07 19:43:51,359  INFO basepage.py get_element [ line:51 ] 在登录页面_获取登录区域提示信息，查找元素('class name', 'form-error-info')
+ 2020-08-07 19:43:51,406  INFO basepage.py get_element_text [ line:130 ] 在登录页面_获取登录区域提示信息，获取元素：('class name', 'form-error-info')的文本:请输入正确的手机号
+ 2020-08-07 19:43:51,793  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:51,819  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:51.793827，结束等待时间点：2020-08-07 19:43:51.819758，等待时长0:00:00.025931
+ 2020-08-07 19:43:51,819  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:51,829  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：11184720553
+ 2020-08-07 19:43:51,937  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:51,960  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:51.938079，结束等待时间点：2020-08-07 19:43:51.960607，等待时长0:00:00.022528
+ 2020-08-07 19:43:51,960  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:51,970  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:43:52,064  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:52,084  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:52.064914，结束等待时间点：2020-08-07 19:43:52.084860，等待时长0:00:00.019946
+ 2020-08-07 19:43:52,084  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:52,093  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:52,156  INFO test_login.py test_0_login_phone_false [ line:35 ] ------输入的手机号是11184720553，输入的密码是python
+ 2020-08-07 19:43:52,157  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_获取登录区域提示信息 等待元素('class name', 'form-error-info')可见
+ 2020-08-07 19:43:52,178  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:52.157836，结束等待时间点：2020-08-07 19:43:52.178744，等待时长0:00:00.020908
+ 2020-08-07 19:43:52,178  INFO basepage.py get_element [ line:51 ] 在登录页面_获取登录区域提示信息，查找元素('class name', 'form-error-info')
+ 2020-08-07 19:43:52,206  INFO basepage.py get_element_text [ line:130 ] 在登录页面_获取登录区域提示信息，获取元素：('class name', 'form-error-info')的文本:请输入正确的手机号
+ 2020-08-07 19:43:52,638  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:52,662  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:52.638028，结束等待时间点：2020-08-07 19:43:52.662961，等待时长0:00:00.024933
+ 2020-08-07 19:43:52,662  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:52,670  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+ 2020-08-07 19:43:52,778  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:52,801  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:52.778651，结束等待时间点：2020-08-07 19:43:52.801590，等待时长0:00:00.022939
+ 2020-08-07 19:43:52,802  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:52,810  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：111111
+ 2020-08-07 19:43:53,210  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:53,252  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:53.211257，结束等待时间点：2020-08-07 19:43:53.252851，等待时长0:00:00.041594
+ 2020-08-07 19:43:53,252  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:53,269  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:53,455  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_获取登录页面中间提示信息 等待元素('class name', 'layui-layer-content')可见
+ 2020-08-07 19:43:54,048  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:53.455724，结束等待时间点：2020-08-07 19:43:54.048137，等待时长0:00:00.592413
+ 2020-08-07 19:43:54,049  INFO basepage.py get_element [ line:51 ] 在登录页面_获取登录页面中间提示信息，查找元素('class name', 'layui-layer-content')
+ 2020-08-07 19:43:54,135  INFO basepage.py get_element_text [ line:130 ] 在登录页面_获取登录页面中间提示信息，获取元素：('class name', 'layui-layer-content')的文本:帐号或密码错误!
+ 2020-08-07 19:43:54,588  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:54,613  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:54.589019，结束等待时间点：2020-08-07 19:43:54.613026，等待时长0:00:00.024007
+ 2020-08-07 19:43:54,613  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:54,623  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+ 2020-08-07 19:43:54,757  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:54,777  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:54.757973，结束等待时间点：2020-08-07 19:43:54.777779，等待时长0:00:00.019806
+ 2020-08-07 19:43:54,778  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:54,786  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：pytho
+ 2020-08-07 19:43:54,879  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:54,904  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:54.880506，结束等待时间点：2020-08-07 19:43:54.904793，等待时长0:00:00.024287
+ 2020-08-07 19:43:54,905  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:54,915  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:54,981  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_获取登录页面中间提示信息 等待元素('class name', 'layui-layer-content')可见
+ 2020-08-07 19:43:55,556  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:54.982616，结束等待时间点：2020-08-07 19:43:55.556690，等待时长0:00:00.574074
+ 2020-08-07 19:43:55,557  INFO basepage.py get_element [ line:51 ] 在登录页面_获取登录页面中间提示信息，查找元素('class name', 'layui-layer-content')
+ 2020-08-07 19:43:55,632  INFO basepage.py get_element_text [ line:130 ] 在登录页面_获取登录页面中间提示信息，获取元素：('class name', 'layui-layer-content')的文本:帐号或密码错误!
+ 2020-08-07 19:43:56,100  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入帐号 等待元素('xpath', "//input[@name='phone']")可见
+ 2020-08-07 19:43:56,127  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:56.100754，结束等待时间点：2020-08-07 19:43:56.127651，等待时长0:00:00.026897
+ 2020-08-07 19:43:56,127  INFO basepage.py get_element [ line:51 ] 在登录页面_输入帐号，查找元素('xpath', "//input[@name='phone']")
+ 2020-08-07 19:43:56,138  INFO basepage.py input_text [ line:103 ] 在登录页面_输入帐号，给('xpath', "//input[@name='phone']")元素，输入：18684720553
+ 2020-08-07 19:43:56,257  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_输入密码 等待元素('xpath', "//input[@name='password']")可见
+ 2020-08-07 19:43:56,283  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:56.257332，结束等待时间点：2020-08-07 19:43:56.283236，等待时长0:00:00.025904
+ 2020-08-07 19:43:56,284  INFO basepage.py get_element [ line:51 ] 在登录页面_输入密码，查找元素('xpath', "//input[@name='password']")
+ 2020-08-07 19:43:56,294  INFO basepage.py input_text [ line:103 ] 在登录页面_输入密码，给('xpath', "//input[@name='password']")元素，输入：python
+ 2020-08-07 19:43:56,396  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击登录 等待元素('xpath', "//button[text()='登录']")可见
+ 2020-08-07 19:43:56,422  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:56.396800，结束等待时间点：2020-08-07 19:43:56.422466，等待时长0:00:00.025666
+ 2020-08-07 19:43:56,422  INFO basepage.py get_element [ line:51 ] 在登录页面_点击登录，查找元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:56,434  INFO basepage.py click_element [ line:78 ] 在登录页面_点击登录，点击元素('xpath', "//button[text()='登录']")
+ 2020-08-07 19:43:56,495  INFO basepage.py wait_eleVisible [ line:29 ] 在 首页_等待退出按钮出现 等待元素('xpath', "//a[text()='退出']")可见
+ 2020-08-07 19:44:18,494  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:43:56.495671，结束等待时间点：2020-08-07 19:44:18.493396，等待时长0:00:21.997725
+ 2020-08-07 19:44:18,495  INFO basepage.py wait_eleVisible [ line:29 ] 在 首页_等待退出按钮出现 等待元素('xpath', "//a[text()='退出']")可见
+ 2020-08-07 19:44:18,614  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:44:18.496213，结束等待时间点：2020-08-07 19:44:18.614344，等待时长0:00:00.118131
+ 2020-08-07 19:44:18,614  INFO test_login.py test_2_login_True [ line:56 ] 断言成功，实际结果为True
+ 2020-08-07 19:44:18,618  INFO conftest.py init_driver_cls [ line:17 ] 执行完成清理工作---整个测试类只执行一次
+ 2020-08-07 19:44:20,747  INFO conftest.py init_driver_cls [ line:12 ] 开始执行用例---scope='class'整个测试类只执行一次
+ 2020-08-07 19:44:27,881  INFO basepage.py wait_eleVisible [ line:29 ] 在 登录页面_点击注册按钮 等待元素('xpath', '//a[@href="/Index/reg.html"]')可见
+ 2020-08-07 19:44:27,931  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:44:27.881740，结束等待时间点：2020-08-07 19:44:27.931731，等待时长0:00:00.049991
+ 2020-08-07 19:44:27,931  INFO basepage.py get_element [ line:51 ] 在登录页面_点击注册按钮，查找元素('xpath', '//a[@href="/Index/reg.html"]')
+ 2020-08-07 19:44:27,942  INFO basepage.py click_element [ line:78 ] 在登录页面_点击注册按钮，点击元素('xpath', '//a[@href="/Index/reg.html"]')
+ 2020-08-07 19:44:28,562  INFO basepage.py wait_eleVisible [ line:29 ] 在 注册页面_获取注册页面标题 等待元素('xpath', "//div[text()='注册']")可见
+ 2020-08-07 19:44:28,612  INFO basepage.py wait_eleVisible [ line:36 ] 开始等待时间点：2020-08-07 19:44:28.563251，结束等待时间点：2020-08-07 19:44:28.612217，等待时长0:00:00.048966
+ 2020-08-07 19:44:28,613  INFO basepage.py get_element [ line:51 ] 在注册页面_获取注册页面标题，查找元素('xpath', "//div[text()='注册']")
+ 2020-08-07 19:44:28,644  INFO basepage.py get_element_text [ line:130 ] 在注册页面_获取注册页面标题，获取元素：('xpath', "//div[text()='注册']")的文本:注册
+ 2020-08-07 19:44:28,646  INFO conftest.py init_driver_cls [ line:17 ] 执行完成清理工作---整个测试类只执行一次

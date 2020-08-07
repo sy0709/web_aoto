@@ -37,6 +37,6 @@ if __name__ == '__main__':
     # pytest.main(['TestCases/login/test_login.py::Test_1_Login::test_2_login_True'])
 
     # 输出allure报告
-    pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5',  report_dir, r'--alluredir=Outputs\allure_reports'])
+    pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', report_dir, r'--alluredir=Outputs\allure_reports'])
 
     # pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', report_dir, allure_dir])
