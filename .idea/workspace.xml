@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="41" column="108" lean-forward="true" selection-start-line="41" selection-start-column="108" selection-end-line="41" selection-end-column="108" />
+            <state relative-caret-position="504">
+              <caret line="41" column="84" selection-start-line="41" selection-start-column="84" selection-end-line="41" selection-end-column="84" />
               <folding>
                 <element signature="e#230#243#0" expanded="true" />
               </folding>
@@ -158,6 +158,12 @@
               <item name="qcd_webAuto_pytest" type="b2602c69:ProjectViewProjectNode" />
               <item name="qcd_webAuto_pytest" type="462c0819:PsiDirectoryNode" />
               <item name="Outputs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qcd_webAuto_pytest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qcd_webAuto_pytest" type="462c0819:PsiDirectoryNode" />
+              <item name="Outputs" type="462c0819:PsiDirectoryNode" />
+              <item name="HTML_reports" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qcd_webAuto_pytest" type="b2602c69:ProjectViewProjectNode" />
@@ -371,7 +377,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.25693527" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25693527" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.33002833" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -379,7 +385,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" visible="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.34844193" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.34844193" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39886847" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -670,8 +676,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="41" column="108" lean-forward="true" selection-start-line="41" selection-start-column="108" selection-end-line="41" selection-end-column="108" />
+        <state relative-caret-position="504">
+          <caret line="41" column="84" selection-start-line="41" selection-start-column="84" selection-end-line="41" selection-end-column="84" />
           <folding>
             <element signature="e#230#243#0" expanded="true" />
           </folding>
