@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay','5','-m', 'run', report_dir])
 
     # 二、使用相对路径，路径相对于rootdir: C:\Users\admin\Desktop\qcd_webAuto_pytest
-    # pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', '--html=Outputs\HTML_reports\\reports.html'])
+    pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', r'--html=Outputs\HTML_reports\reports.html'])
 
     # 三、指定运行的测试子集 运行单个子目录 运行测试有很多方式，不但可以选择运行某个测试目录、文件、类中的测试，还可以选择运行某一个测试用例
     # pytest.main(['-s', '-v', 'TestCases/login/','-m','run','--reruns', '2', '--reruns-delay', '5', report_dir])
@@ -37,6 +37,6 @@ if __name__ == '__main__':
     # pytest.main(['TestCases/login/test_login.py::Test_1_Login::test_2_login_True'])
 
     # 输出allure报告
-    pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', report_dir, r'--alluredir=Outputs\allure_reports'])
+    # pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', report_dir, r'--alluredir=Outputs\allure_reports'])
 
     # pytest.main(['-s', '-v', '--reruns', '2', '--reruns-delay', '5', '-m', 'run', report_dir, allure_dir])

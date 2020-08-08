@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f78f1e70-a3b0-4eec-ac79-82e42d6cc903" name="Default Changelist" comment="" />
+    <list default="true" id="f78f1e70-a3b0-4eec-ac79-82e42d6cc903" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="41" column="84" selection-start-line="41" selection-start-column="84" selection-end-line="41" selection-end-column="84" />
+            <state relative-caret-position="344">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
               <folding>
                 <element signature="e#230#243#0" expanded="true" />
               </folding>
@@ -146,7 +149,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,12 +181,18 @@
             <path>
               <item name="qcd_webAuto_pytest" type="b2602c69:ProjectViewProjectNode" />
               <item name="qcd_webAuto_pytest" type="462c0819:PsiDirectoryNode" />
+              <item name="PageObjects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qcd_webAuto_pytest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qcd_webAuto_pytest" type="462c0819:PsiDirectoryNode" />
               <item name="TestCases" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -312,10 +320,10 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.test_login" />
-      <item itemvalue="Python tests.pytest in test_invest.py" />
       <item itemvalue="Python tests.Unittests for test_login.TestLogin" />
       <item itemvalue="Python tests.Unittests in test_invest.py" />
       <item itemvalue="Python tests.Unittests in test_login.py" />
+      <item itemvalue="Python tests.pytest in test_invest.py" />
     </list>
     <recent_temporary>
       <list>
@@ -513,30 +521,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages/_pytest/fixtures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="1079" column="9" selection-start-line="1079" selection-start-column="4" selection-end-line="1079" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/登录页面_点击登录_2020-08-03 22_10_30.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/logs/Web_Autotest_2020-08-03 2209.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="68" column="34" lean-forward="true" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/logs/Web_Autotest_2020-08-03 2215.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-355">
-          <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages/_pytest/fixtures.py" />
+    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/登录页面_点击登录_2020-08-03 22_10_30.png" />
+    <entry file="file://$PROJECT_DIR$/Outputs/logs/Web_Autotest_2020-08-03 2209.log" />
+    <entry file="file://$PROJECT_DIR$/Outputs/logs/Web_Autotest_2020-08-03 2215.log" />
     <entry file="file://$PROJECT_DIR$/TestDatas/login_datas/loginDatas.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
@@ -544,16 +532,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/登录页面_点击登录_2020-08-03 22_09_07.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/logs/Web_Autotest_2020-08-03 2225.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-757">
-          <caret line="25" column="100" selection-start-line="25" selection-start-column="100" selection-end-line="25" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/登录页面_点击登录_2020-08-03 22_09_07.png" />
+    <entry file="file://$PROJECT_DIR$/Outputs/logs/Web_Autotest_2020-08-03 2225.log" />
     <entry file="file://$PROJECT_DIR$/TestCases/conftest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
@@ -584,14 +564,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/HTML_reports/2020_08_04_15_19_33report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6103" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/登录页面_点击登录_2020-08-03 22_15_45.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Outputs/HTML_reports/2020_08_04_15_19_33report.html" />
+    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/登录页面_点击登录_2020-08-03 22_15_45.png" />
     <entry file="file://$PROJECT_DIR$/TestDatas/login_datas/commonDatas.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -599,13 +573,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/HTML_reports/2020_08_04_15_38_36report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Outputs/HTML_reports/2020_08_04_15_38_36report.html" />
     <entry file="file://$PROJECT_DIR$/TestCases/index/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -617,6 +585,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestCases/Invest/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qw/wewe/dfd/ggg.py" />
+    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 16_29_08.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 16_27_33.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#230#243#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 19_43_38.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/TestCases/Invest/test_invest.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -658,28 +646,6 @@
           <caret line="18" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qw/wewe/dfd/ggg.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 16_29_08.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 16_27_33.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Outputs/screenshots/标页面_投票成功弹窗-点击查看并激活_2020-08-07 19_43_38.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="41" column="84" selection-start-line="41" selection-start-column="84" selection-end-line="41" selection-end-column="84" />
-          <folding>
-            <element signature="e#230#243#0" expanded="true" />
           </folding>
         </state>
       </provider>
